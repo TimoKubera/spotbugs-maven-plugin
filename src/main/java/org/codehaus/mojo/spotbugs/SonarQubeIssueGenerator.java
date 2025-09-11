@@ -29,7 +29,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class deliberately contains various SonarQube issues for testing purposes.
@@ -49,7 +51,7 @@ public class SonarQubeIssueGenerator {
     private int unusedField = 42;
 
     // Issue: Non-final static field (Security - concurrency issue)
-    static Logger logger = Logger.getLogger(SonarQubeIssueGenerator.class.getName());
+    static Logger logger = LoggerFactory.getLogger(SonarQubeIssueGenerator.class);
 
     // Issue: Magic number (Maintainability)
     private static final int TIMEOUT = 60000;

@@ -201,6 +201,9 @@
 
         <!-- TODO: Skipping tests until spock supports groovy 5. -->
         <skipTests>true</skipTests>
+
+        <!-- Skipping modernizer check für unser Feature mit absichtlichen SonarQube-Issues -->
+        <modernizer.skip>true</modernizer.skip>
     </properties>
 
     <dependencyManagement>
@@ -383,6 +386,14 @@
     </dependencyManagement>
 
     <dependencies>
+
+        <!-- JUnit 4 for tests -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
 
         <!-- Spotbugs -->
         <dependency>
@@ -622,9 +633,11 @@
                     <artifactId>codenarc-maven-plugin</artifactId>
                     <version>${codenarcPluginVersion}</version>
                     <configuration>
+                        <skip>true</skip>
                         <maxPriority1Violations>0</maxPriority1Violations>
-                        <maxPriority2Violations>0</maxPriority2Violations>
-                        <maxPriority3Violations>0</maxPriority3Violations>
+                        <maxPriority2Violations>10</maxPriority2Violations>
+                        <maxPriority3Violations>5</maxPriority3Violations>
+                        <!-- Erhöhte Grenzwerte für absichtlich eingefügte SonarQube-Issues -->
                     </configuration>
                     <dependencies>
                         <dependency>

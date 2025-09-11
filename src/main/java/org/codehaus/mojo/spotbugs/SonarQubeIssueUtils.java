@@ -232,13 +232,15 @@ public class SonarQubeIssueUtils {
     }
 
     // Issue: Catch exceptions in the wrong order (Reliability)
+    // Original code had Exception catching before IOException which would cause compilation errors:
+    // try { ... } catch (Exception e) { ... } catch (IOException e) { ... }
     public static void processFile(String path) {
         try {
             Files.readAllBytes(Paths.get(path));
-        } catch (Exception e) { // Catches all exceptions
-            System.err.println("General error: " + e.getMessage());
-        } catch (IOException e) { // This will never be reached
+        } catch (IOException e) { // More specific exception first
             System.err.println("IO error: " + e.getMessage());
+        } catch (Exception e) { // More general exception second
+            System.err.println("General error: " + e.getMessage());
         }
     }
 
