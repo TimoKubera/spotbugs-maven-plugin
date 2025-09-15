@@ -36,6 +36,18 @@ public class UserManagementService implements Cloneable {
     private String serviceId = "user-management-service";
     private List<UserProfile> userProfiles = new ArrayList<>();
 
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
+    public PaymentService getPaymentService() {
+        return paymentService;
+    }
+
+    public String getServiceId() {
+        return serviceId;
+    }
+
     /**
      * Validates the user session and performs authentication.
      */
@@ -121,6 +133,14 @@ public class UserManagementService implements Cloneable {
             this.sessionId = sessionId;
             this.lastActivity = System.currentTimeMillis();
         }
+
+        public String getSessionId() {
+            return sessionId;
+        }
+
+        public long getLastActivity() {
+            return lastActivity;
+        }
     }
 
     class UserProfile {
@@ -130,6 +150,14 @@ public class UserManagementService implements Cloneable {
         public UserProfile(String username, String displayName) {
             this.username = username;
             this.displayName = displayName;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public String getDisplayName() {
+            return displayName;
         }
     }
 }
@@ -153,5 +181,13 @@ class UserAccount {
     public UserAccount(String username, String passwordHash) {
         this.username = username;
         this.passwordHash = passwordHash;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
     }
 }
