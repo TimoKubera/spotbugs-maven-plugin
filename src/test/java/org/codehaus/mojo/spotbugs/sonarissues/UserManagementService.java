@@ -24,10 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-/**
- * Service for managing user accounts, profiles, and security settings.
- * This file demonstrates 9 distinct Sonar issues across security, reliability, and maintainability.
- */
 public class UserManagementService implements Cloneable {
 
     private UserRepository userRepository;
