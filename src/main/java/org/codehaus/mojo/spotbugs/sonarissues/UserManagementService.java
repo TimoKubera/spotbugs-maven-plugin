@@ -110,17 +110,14 @@ public class UserManagementService implements Cloneable {
     }
 
     /**
-     * Creates a clone of the service for testing purposes.
+     * Copy constructor for creating a new instance of UserManagementService based on an existing instance.
      */
-    @Override
-    public UserManagementService clone() {
-        try {
-            UserManagementService copy = (UserManagementService) super.clone();
-            copy.userProfiles = new ArrayList<>(userProfiles);
-            return copy;
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
+    public UserManagementService(UserManagementService other) {
+        this.userRepository = other.userRepository;
+        this.paymentService = other.paymentService;
+        this.activeSessions = new HashMap<>(other.activeSessions);
+        this.serviceId = other.serviceId;
+        this.userProfiles = new ArrayList<>(other.userProfiles);
     }
 
     // Inner classes to support the service functionality
