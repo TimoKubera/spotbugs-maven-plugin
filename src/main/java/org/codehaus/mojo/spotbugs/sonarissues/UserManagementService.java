@@ -99,10 +99,7 @@ public class UserManagementService implements Cloneable {
      * Check if username contains a valid prefix.
      */
     public boolean hasValidUsernamePrefix(String username) {
-        if (username.indexOf("user_") > 0) {
-            return true;
-        }
-        return false;
+        return username.indexOf("user_") > 0;
     }
 
     private boolean isActiveSession(String sessionId) {
