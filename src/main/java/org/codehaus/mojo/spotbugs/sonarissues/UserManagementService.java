@@ -89,10 +89,7 @@ public class UserManagementService implements Cloneable {
      * Compare user display names.
      */
     public boolean compareUserDisplayNames(String name1, String name2) {
-        if (name1 == name2) {
-            return true;
-        }
-        return false;
+        return name1 == name2;
     }
 
     /**
