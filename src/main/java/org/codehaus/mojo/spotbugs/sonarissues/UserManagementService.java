@@ -82,7 +82,7 @@ public class UserManagementService implements Cloneable {
      */
     public BigDecimal calculateSubscriptionFee(double baseFee, double taxRate) {
         double totalFee = baseFee * (1 + taxRate);
-        return new BigDecimal(totalFee);
+        return BigDecimal.valueOf(totalFee);
     }
 
     /**
