@@ -66,6 +66,8 @@ class MathUtilsTest {
     void testPowerBasic() {
         assertEquals(8, mathUtils.power(2, 3));
         assertEquals(1, mathUtils.power(5, 0));
+        assertEquals(1, mathUtils.power(-2, 0));
+        assertEquals(1, mathUtils.power(0, 0));
         // Note: Zero base and negative exponents not tested
         assertEquals(0, mathUtils.power(0, 3));
         assertThrows(IllegalArgumentException.class, () -> mathUtils.power(2, -1));
