@@ -102,4 +102,16 @@ class MathUtilsTest {
         assertTrue(mathUtils.isPositive(Integer.MAX_VALUE));
         assertFalse(mathUtils.isPositive(Integer.MIN_VALUE));
     }
+
+    @Test
+    void testMaxBasic() {
+        assertEquals(7, mathUtils.max(3, 7));
+        assertEquals(5, mathUtils.max(5, 1));
+        // Note: Equal values edge case
+        assertEquals(5, mathUtils.max(5, 5));
+        // Test negative values and extremes
+        assertEquals(Integer.MAX_VALUE, mathUtils.max(Integer.MIN_VALUE, Integer.MAX_VALUE));
+        assertEquals(Integer.MAX_VALUE, mathUtils.max(Integer.MAX_VALUE, Integer.MIN_VALUE));
+        assertEquals(-5, mathUtils.max(-10, -5));
+    }
 }
