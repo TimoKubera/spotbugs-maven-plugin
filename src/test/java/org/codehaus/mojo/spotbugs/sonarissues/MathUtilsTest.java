@@ -2,7 +2,7 @@
  * Copyright 2005-2025 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * You may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     https://www.apache.org/licenses/LICENSE-2.0
@@ -39,6 +39,8 @@ class MathUtilsTest {
         assertEquals(0, mathUtils.abs(0));
         // Test negative one edge case
         assertEquals(1, mathUtils.abs(-1));
+        // Test off-by-one edge case for MIN_VALUE + 1
+        assertEquals(Integer.MAX_VALUE, mathUtils.abs(Integer.MIN_VALUE + 1));
 
         // Instrumented check to ensure zero goes through the non-negative branch
         InstrumentedMathUtils instrumented = new InstrumentedMathUtils();
@@ -46,6 +48,13 @@ class MathUtilsTest {
         assertEquals(0, resultZero);
         assertTrue(instrumented.positiveBranchHit, "Expected positive branch for zero input");
         assertFalse(instrumented.negativeBranchHit, "Did not expect negative branch for zero input");
+
+        // Instrumented check for negative input branch
+        InstrumentedMathUtils instrumentedNeg = new InstrumentedMathUtils();
+        int resultNeg = instrumentedNeg.abs(-8);
+        assertEquals(8, resultNeg);
+        assertTrue(instrumentedNeg.negativeBranchHit, "Expected negative branch for negative input");
+        assertFalse(instrumentedNeg.positiveBranchHit, "Did not expect positive branch for negative input");
     }
 
     @Test
@@ -148,6 +157,13 @@ class MathUtilsTest {
         assertEquals(5, result);
         assertTrue(instrumented.elseBranchHit, "Expected else branch for equal inputs");
         assertFalse(instrumented.ifBranchHit, "Did not expect if branch for equal inputs");
+
+        // Instrumented check for a < b branch
+        InstrumentedMinMathUtils instrumentedLess = new InstrumentedMinMathUtils();
+        int resultLess = instrumentedLess.min(3, 5);
+        assertEquals(3, resultLess);
+        assertTrue(instrumentedLess.ifBranchHit, "Expected if branch for a<b inputs");
+        assertFalse(instrumentedLess.elseBranchHit, "Did not expect else branch for a<b inputs");
     }
 
     /**
