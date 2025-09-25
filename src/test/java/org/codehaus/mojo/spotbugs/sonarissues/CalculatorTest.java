@@ -182,5 +182,8 @@ public class CalculatorTest {
 		assertThrows(IllegalArgumentException.class, () -> calculator.average((int[]) null));
 		// Additional multiple elements
 		assertEquals(2.5, calculator.average(1, 2, 3, 4), 0.001);
+		// Additional precision boundary cases to catch non-integer averages
+		assertEquals(2.3333333333333335, calculator.average(1, 2, 4), 1e-9);
+		assertEquals(0.3333333333333333, calculator.average(1, -1, 1), 1e-9);
 	}
 }
