@@ -1,14 +1,14 @@
 /*
  * Copyright 2005-2025 the original author or authors.
  *
- * Licensed under the Apache License, Version 2.0 (the \"License\");
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an \"AS IS\" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -35,6 +35,8 @@ class MathUtilsTest {
         assertEquals(Integer.MIN_VALUE, mathUtils.abs(Integer.MIN_VALUE));
         // Test Integer.MAX_VALUE edge case
         assertEquals(Integer.MAX_VALUE, mathUtils.abs(Integer.MAX_VALUE));
+        // Test zero edge case
+        assertEquals(0, mathUtils.abs(0));
     }
 
     @Test
@@ -47,6 +49,8 @@ class MathUtilsTest {
         assertEquals(Integer.MIN_VALUE, mathUtils.min(Integer.MIN_VALUE, Integer.MAX_VALUE));
         assertEquals(Integer.MIN_VALUE, mathUtils.min(Integer.MAX_VALUE, Integer.MIN_VALUE));
         assertEquals(-10, mathUtils.min(-10, -5));
+        // Test equal negative values edge case
+        assertEquals(-5, mathUtils.min(-5, -5));
     }
 
     @Test
@@ -113,5 +117,7 @@ class MathUtilsTest {
         assertEquals(Integer.MAX_VALUE, mathUtils.max(Integer.MIN_VALUE, Integer.MAX_VALUE));
         assertEquals(Integer.MAX_VALUE, mathUtils.max(Integer.MAX_VALUE, Integer.MIN_VALUE));
         assertEquals(-5, mathUtils.max(-10, -5));
+        // Test equal negative values edge case
+        assertEquals(-5, mathUtils.max(-5, -5));
     }
 }
