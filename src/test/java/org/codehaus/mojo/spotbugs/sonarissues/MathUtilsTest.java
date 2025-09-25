@@ -32,6 +32,7 @@ class MathUtilsTest {
         assertEquals(5, mathUtils.abs(5));
         assertEquals(10, mathUtils.abs(-10));
         // Note: Integer.MIN_VALUE edge case not tested
+        assertEquals(Integer.MIN_VALUE, mathUtils.abs(Integer.MIN_VALUE));
     }
 
     @Test
@@ -39,6 +40,7 @@ class MathUtilsTest {
         assertEquals(3, mathUtils.min(3, 7));
         assertEquals(1, mathUtils.min(5, 1));
         // Note: Equal values edge case not tested
+        assertEquals(5, mathUtils.min(5, 5));
     }
 
     @Test
@@ -46,6 +48,8 @@ class MathUtilsTest {
         assertTrue(mathUtils.isEven(4));
         assertFalse(mathUtils.isEven(3));
         // Note: Zero and negative numbers edge cases not tested
+        assertTrue(mathUtils.isEven(0));
+        assertTrue(mathUtils.isEven(-2));
     }
 
     @Test
@@ -53,6 +57,8 @@ class MathUtilsTest {
         assertEquals(8, mathUtils.power(2, 3));
         assertEquals(1, mathUtils.power(5, 0));
         // Note: Zero base and negative exponents not tested
+        assertEquals(0, mathUtils.power(0, 3));
+        assertThrows(IllegalArgumentException.class, () -> mathUtils.power(2, -1));
     }
 
     @Test
@@ -61,6 +67,8 @@ class MathUtilsTest {
         assertEquals(6, mathUtils.factorial(3));
         assertEquals(24, mathUtils.factorial(4));
         // Note: Negative numbers and zero edge cases not tested
+        assertEquals(1, mathUtils.factorial(0));
+        assertThrows(IllegalArgumentException.class, () -> mathUtils.factorial(-5));
     }
 
     @Test
@@ -68,5 +76,6 @@ class MathUtilsTest {
         assertTrue(mathUtils.isPositive(5));
         assertFalse(mathUtils.isPositive(-3));
         // Note: Zero edge case not tested
+        assertFalse(mathUtils.isPositive(0));
     }
 }
