@@ -1,14 +1,14 @@
 /*
  * Copyright 2005-2025 the original author or authors.
  *
- * Licensed under the Apache License, Version 2.0 (the \"License\");
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an \"AS IS\" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -118,8 +118,6 @@ public class CalculatorTest {
 		assertFalse(calculator.isPrime(12));
 	}
 
-	// Intentionally NOT testing average() method - allows mutations to survive
-
 	@Test
 	public void testFibonacci() {
 		assertEquals(0, calculator.fibonacci(0));
@@ -167,6 +165,11 @@ public class CalculatorTest {
 		assertTrue(calculator.isValidInteger("+123"));
 		assertFalse(calculator.isValidInteger(" 123"));  // Leading space
 		assertFalse(calculator.isValidInteger("12.3"));  // Decimal number
+		// Additional boundary and format cases
+		assertFalse(calculator.isValidInteger("123 "));   // Trailing space
+		assertFalse(calculator.isValidInteger("1 23"));   // Internal space
+		assertTrue(calculator.isValidInteger("2147483647"));   // Max int
+		assertFalse(calculator.isValidInteger("2147483648"));  // Overflow beyond int
 	}
 
 	@Test
