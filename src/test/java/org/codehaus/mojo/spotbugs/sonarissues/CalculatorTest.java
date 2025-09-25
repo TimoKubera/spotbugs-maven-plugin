@@ -40,18 +40,28 @@ public class CalculatorTest {
     public void testAdd() {
         assertEquals(5, calculator.add(2, 3));
         // Missing edge cases: negative numbers, zero, etc.
+        assertEquals(0, calculator.add(2, -2));
+        assertEquals(-5, calculator.add(-2, -3));
+        assertEquals(2, calculator.add(2, 0));
     }
 
     @Test
     public void testSubtract() {
         assertEquals(1, calculator.subtract(3, 2));
         // Missing edge cases
+        assertEquals(-1, calculator.subtract(-3, -2));
+        assertEquals(3, calculator.subtract(3, 0));
+        assertEquals(-5, calculator.subtract(-2, 3));
+        assertEquals(5, calculator.subtract(3, -2));
     }
 
     @Test
     public void testMultiply() {
         assertEquals(6, calculator.multiply(2, 3));
         // Missing edge cases: zero, negative numbers, etc.
+        assertEquals(0, calculator.multiply(2, 0));
+        assertEquals(-6, calculator.multiply(-2, 3));
+        assertEquals(6, calculator.multiply(-2, -3));
     }
 
     @Test
@@ -61,8 +71,11 @@ public class CalculatorTest {
         // Test division by zero
         assertThrows(IllegalArgumentException.class, () -> calculator.divide(5, 0));
         // Missing other edge cases
+        assertEquals(1.5, calculator.divide(3, 2), 0.001);
+        assertEquals(-2.0, calculator.divide(-4, 2), 0.001);
+        assertEquals(-2.0, calculator.divide(4, -2), 0.001);
+        assertEquals(2.0, calculator.divide(-4, -2), 0.001);
     }
-
 
     @Test
     public void testMax() {
@@ -70,8 +83,9 @@ public class CalculatorTest {
         // Kill boundary mutations
         assertEquals(5, calculator.max(5, 3));  // Reverse order
         assertEquals(5, calculator.max(5, 5));  // Equal values
+        assertEquals(-1, calculator.max(-1, -2));
+        assertEquals(0, calculator.max(0, -1));
     }
-
 
     @Test
     public void testIsPrime() {
@@ -82,8 +96,9 @@ public class CalculatorTest {
         assertFalse(calculator.isPrime(0));  // Edge case: boundary check
         assertTrue(calculator.isPrime(2));   // Edge case: smallest prime
         assertFalse(calculator.isPrime(9));  // Perfect square: kills modulus mutation
+        assertFalse(calculator.isPrime(-7));  // Negative input
+        assertFalse(calculator.isPrime(15));  // Composite non-square
     }
-
 
     // Intentionally NOT testing average() method - allows mutations to survive
 
@@ -96,6 +111,8 @@ public class CalculatorTest {
         assertEquals(1, calculator.fibonacci(2));  // Kill boundary mutation for n == 1
         assertEquals(2, calculator.fibonacci(3));  // Kill additional conditional mutations
         assertThrows(IllegalArgumentException.class, () -> calculator.fibonacci(-1));
+        assertEquals(13, calculator.fibonacci(7));  // Additional mutation killing
+        assertEquals(55, calculator.fibonacci(10));
     }
 
     @Test
@@ -113,16 +130,21 @@ public class CalculatorTest {
         assertEquals(5, calculator.gcd(10, -15));
         assertEquals(5, calculator.gcd(-10, -15));
         assertThrows(IllegalArgumentException.class, () -> calculator.gcd(0, 0));
+        assertEquals(1, calculator.gcd(7, 13));
+        assertEquals(1, calculator.gcd(13, 7));
     }
 
     @Test
     public void testIsValidInteger() {
-        assertTrue(calculator.isValidInteger(\"123\"));
-        assertFalse(calculator.isValidInteger(\"abc\"));
+        assertTrue(calculator.isValidInteger("123"));
+        assertFalse(calculator.isValidInteger("abc"));
         // Kill boundary mutations
         assertFalse(calculator.isValidInteger(null));   // Null check
-        assertFalse(calculator.isValidInteger(\"\"));     // Empty string
-        assertTrue(calculator.isValidInteger(\"-123\"));  // Negative numbers
+        assertFalse(calculator.isValidInteger(""));     // Empty string
+        assertTrue(calculator.isValidInteger("-123"));  // Negative numbers
+        assertTrue(calculator.isValidInteger("+123"));
+        assertFalse(calculator.isValidInteger(" 123"));  // Leading space
+        assertFalse(calculator.isValidInteger("12.3"));  // Decimal number
     }
 
     @Test
