@@ -141,6 +141,15 @@ class MathUtilsTest {
         assertEquals(5, mathUtils.max(5, 0));
     }
 
+    @Test
+    void testMinBranchOnEqualInputs() {
+        InstrumentedMinMathUtils instrumented = new InstrumentedMinMathUtils();
+        int result = instrumented.min(5, 5);
+        assertEquals(5, result);
+        assertTrue(instrumented.elseBranchHit, "Expected else branch for equal inputs");
+        assertFalse(instrumented.ifBranchHit, "Did not expect if branch for equal inputs");
+    }
+
     /**
      * Subclass of MathUtils to instrument which branch of abs(int) is taken.
      */
@@ -157,6 +166,25 @@ class MathUtilsTest {
             }
             // Delegate to actual implementation
             return super.abs(x);
+        }
+    }
+
+    /**
+     * Subclass of MathUtils to instrument which branch of min(int,int) is taken.
+     */
+    private static class InstrumentedMinMathUtils extends MathUtils {
+        boolean ifBranchHit = false;
+        boolean elseBranchHit = false;
+
+        @Override
+        public int min(int a, int b) {
+            if (a < b) {
+                ifBranchHit = true;
+                return super.min(a, b);
+            } else {
+                elseBranchHit = true;
+                return super.min(a, b);
+            }
         }
     }
 }
