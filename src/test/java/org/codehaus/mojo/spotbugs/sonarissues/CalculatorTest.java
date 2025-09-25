@@ -64,7 +64,6 @@ public class CalculatorTest {
     }
 
 
-
     @Test
     public void testMax() {
         assertEquals(5, calculator.max(3, 5));
@@ -72,9 +71,6 @@ public class CalculatorTest {
         assertEquals(5, calculator.max(5, 3));  // Reverse order
         assertEquals(5, calculator.max(5, 5));  // Equal values
     }
-
-
-
 
 
     @Test
@@ -87,7 +83,6 @@ public class CalculatorTest {
         assertTrue(calculator.isPrime(2));   // Edge case: smallest prime
         assertFalse(calculator.isPrime(9));  // Perfect square: kills modulus mutation
     }
-
 
 
     // Intentionally NOT testing average() method - allows mutations to survive
@@ -121,5 +116,16 @@ public class CalculatorTest {
         assertFalse(calculator.isValidInteger(null));   // Null check
         assertFalse(calculator.isValidInteger(""));     // Empty string
         assertTrue(calculator.isValidInteger("-123"));  // Negative numbers
+    }
+
+    @Test
+    public void testAverage() {
+        assertEquals(2.0, calculator.average(1, 2, 3), 0.001);
+        assertEquals(5.0, calculator.average(5), 0.001);
+        assertEquals(0.0, calculator.average(-2, 2), 0.001);
+        assertEquals(0.0, calculator.average(0, 0), 0.001);
+        // Test null and no args
+        assertThrows(IllegalArgumentException.class, () -> calculator.average());
+        assertThrows(IllegalArgumentException.class, () -> calculator.average((int[]) null));
     }
 }
