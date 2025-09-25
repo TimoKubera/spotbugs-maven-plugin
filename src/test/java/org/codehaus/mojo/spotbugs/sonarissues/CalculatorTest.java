@@ -88,6 +88,9 @@ public class CalculatorTest {
 		assertEquals(2.0, calculator.divide(-4, -2), 0.001);
 		// Additional zero-numerator
 		assertEquals(0.0, calculator.divide(0, 5), 0.001);
+		// Additional non-integer division to catch precision or sign mutations
+		assertEquals(0.3333333333333333, calculator.divide(1, 3), 1e-9);
+		assertEquals(-0.3333333333333333, calculator.divide(1, -3), 1e-9);
 	}
 
 	@Test
