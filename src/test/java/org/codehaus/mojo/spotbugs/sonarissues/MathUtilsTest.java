@@ -39,6 +39,13 @@ class MathUtilsTest {
         assertEquals(0, mathUtils.abs(0));
         // Test negative one edge case
         assertEquals(1, mathUtils.abs(-1));
+
+        // Instrumented check to ensure zero goes through the non-negative branch
+        InstrumentedMathUtils instrumented = new InstrumentedMathUtils();
+        int resultZero = instrumented.abs(0);
+        assertEquals(0, resultZero);
+        assertTrue(instrumented.positiveBranchHit, "Expected positive branch for zero input");
+        assertFalse(instrumented.negativeBranchHit, "Did not expect negative branch for zero input");
     }
 
     @Test
@@ -132,5 +139,24 @@ class MathUtilsTest {
         // Test zero and positive mix edge cases
         assertEquals(5, mathUtils.max(0, 5));
         assertEquals(5, mathUtils.max(5, 0));
+    }
+
+    /**
+     * Subclass of MathUtils to instrument which branch of abs(int) is taken.
+     */
+    private static class InstrumentedMathUtils extends MathUtils {
+        boolean negativeBranchHit = false;
+        boolean positiveBranchHit = false;
+
+        @Override
+        public int abs(int x) {
+            if (x < 0) {
+                negativeBranchHit = true;
+            } else {
+                positiveBranchHit = true;
+            }
+            // Delegate to actual implementation
+            return super.abs(x);
+        }
     }
 }
