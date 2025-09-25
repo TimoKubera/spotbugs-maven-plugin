@@ -37,6 +37,8 @@ class MathUtilsTest {
         assertEquals(Integer.MAX_VALUE, mathUtils.abs(Integer.MAX_VALUE));
         // Test zero edge case
         assertEquals(0, mathUtils.abs(0));
+        // Test negative one edge case
+        assertEquals(1, mathUtils.abs(-1));
     }
 
     @Test
@@ -51,6 +53,9 @@ class MathUtilsTest {
         assertEquals(-10, mathUtils.min(-10, -5));
         // Test equal negative values edge case
         assertEquals(-5, mathUtils.min(-5, -5));
+        // Test zero and positive mix edge cases
+        assertEquals(0, mathUtils.min(0, 5));
+        assertEquals(0, mathUtils.min(5, 0));
     }
 
     @Test
@@ -81,6 +86,9 @@ class MathUtilsTest {
         // Test negative base with even and odd exponents
         assertEquals(4, mathUtils.power(-2, 2));
         assertEquals(-8, mathUtils.power(-2, 3));
+        // Test negative exponents on zero and negative base throw exception
+        assertThrows(IllegalArgumentException.class, () -> mathUtils.power(0, -2));
+        assertThrows(IllegalArgumentException.class, () -> mathUtils.power(-2, -3));
     }
 
     @Test
@@ -94,6 +102,8 @@ class MathUtilsTest {
         // Test additional values
         assertEquals(2, mathUtils.factorial(2));
         assertEquals(120, mathUtils.factorial(5));
+        // Test additional factorial value
+        assertEquals(720, mathUtils.factorial(6));
     }
 
     @Test
@@ -119,5 +129,8 @@ class MathUtilsTest {
         assertEquals(-5, mathUtils.max(-10, -5));
         // Test equal negative values edge case
         assertEquals(-5, mathUtils.max(-5, -5));
+        // Test zero and positive mix edge cases
+        assertEquals(5, mathUtils.max(0, 5));
+        assertEquals(5, mathUtils.max(5, 0));
     }
 }
