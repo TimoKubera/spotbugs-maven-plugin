@@ -116,6 +116,10 @@ public class CalculatorTest {
 		// Additional primes/composites
 		assertTrue(calculator.isPrime(11));
 		assertFalse(calculator.isPrime(12));
+		// Added to kill square and larger primes
+		assertFalse(calculator.isPrime(16));
+		assertFalse(calculator.isPrime(25));
+		assertTrue(calculator.isPrime(17));
 	}
 
 	@Test
@@ -131,6 +135,8 @@ public class CalculatorTest {
 		assertEquals(55, calculator.fibonacci(10));
 		// Larger index check
 		assertEquals(89, calculator.fibonacci(11));
+		// Added larger sequence value
+		assertEquals(6765, calculator.fibonacci(20));
 	}
 
 	@Test
@@ -170,6 +176,11 @@ public class CalculatorTest {
 		assertFalse(calculator.isValidInteger("1 23"));   // Internal space
 		assertTrue(calculator.isValidInteger("2147483647"));   // Max int
 		assertFalse(calculator.isValidInteger("2147483648"));  // Overflow beyond int
+		// Added sign-only and zero tests
+		assertFalse(calculator.isValidInteger("-"));
+		assertFalse(calculator.isValidInteger("+"));
+		assertTrue(calculator.isValidInteger("0"));
+		assertTrue(calculator.isValidInteger("+0"));
 	}
 
 	@Test
@@ -188,5 +199,9 @@ public class CalculatorTest {
 		// Additional precision boundary cases to catch non-integer averages
 		assertEquals(2.3333333333333335, calculator.average(1, 2, 4), 1e-9);
 		assertEquals(0.3333333333333333, calculator.average(1, -1, 1), 1e-9);
+		// Added extreme values tests
+		assertEquals((double) Integer.MAX_VALUE, calculator.average(Integer.MAX_VALUE), 0.001);
+		assertEquals((double) Integer.MIN_VALUE, calculator.average(Integer.MIN_VALUE), 0.001);
+		assertEquals(0.0, calculator.average(Integer.MAX_VALUE, Integer.MIN_VALUE), 1e-9);
 	}
 }
