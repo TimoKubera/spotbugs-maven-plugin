@@ -117,17 +117,19 @@ public class CalculatorTest {
 
     @Test
     public void testIsValidInteger() {
-        assertTrue(calculator.isValidInteger("123"));
-        assertFalse(calculator.isValidInteger("abc"));
+        assertTrue(calculator.isValidInteger(\"123\"));
+        assertFalse(calculator.isValidInteger(\"abc\"));
         // Kill boundary mutations
         assertFalse(calculator.isValidInteger(null));   // Null check
-        assertFalse(calculator.isValidInteger(""));     // Empty string
-        assertTrue(calculator.isValidInteger("-123"));  // Negative numbers
+        assertFalse(calculator.isValidInteger(\"\"));     // Empty string
+        assertTrue(calculator.isValidInteger(\"-123\"));  // Negative numbers
     }
 
     @Test
     public void testAverage() {
         assertEquals(2.0, calculator.average(1, 2, 3), 0.001);
+        assertEquals(1.5, calculator.average(1, 2), 0.001);
+        assertEquals(3.0, calculator.average(1, 3, 5), 0.001);
         assertEquals(5.0, calculator.average(5), 0.001);
         assertEquals(0.0, calculator.average(-2, 2), 0.001);
         assertEquals(0.0, calculator.average(0, 0), 0.001);
