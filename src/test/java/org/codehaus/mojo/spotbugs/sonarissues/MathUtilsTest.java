@@ -63,6 +63,9 @@ public class MathUtilsTest {
         assertEquals(1, mathUtils.factorial(0));
         assertEquals(-1, mathUtils.factorial(-5));
         assertEquals(120, mathUtils.factorial(5));
+        // Additional assertions for mutation coverage
+        assertEquals(-1, mathUtils.factorial(-1));
+        assertEquals(720, mathUtils.factorial(6));
     }
 
     @Test
