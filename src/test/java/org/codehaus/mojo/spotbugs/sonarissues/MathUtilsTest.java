@@ -59,6 +59,10 @@ public class MathUtilsTest {
         assertEquals(1, mathUtils.factorial(1));
         assertEquals(6, mathUtils.factorial(3));
         assertEquals(24, mathUtils.factorial(4));
+        // Edge cases for factorial method
+        assertEquals(1, mathUtils.factorial(0));
+        assertEquals(-1, mathUtils.factorial(-5));
+        assertEquals(120, mathUtils.factorial(5));
     }
 
     @Test
