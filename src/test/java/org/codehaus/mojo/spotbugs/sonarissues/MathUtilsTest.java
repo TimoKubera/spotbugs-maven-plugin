@@ -40,6 +40,10 @@ public class MathUtilsTest {
     void testMinBasic() {
         assertEquals(3, mathUtils.min(3, 7));
         assertEquals(1, mathUtils.min(5, 1));
+        // Edge cases for min method: equal and negative inputs
+        assertEquals(5, mathUtils.min(5, 5));
+        assertEquals(-2, mathUtils.min(-2, 3));
+        assertEquals(-5, mathUtils.min(-5, -3));
     }
 
     @Test
