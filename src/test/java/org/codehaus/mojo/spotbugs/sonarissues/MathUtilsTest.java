@@ -79,5 +79,8 @@ public class MathUtilsTest {
         assertFalse(mathUtils.isPositive(-3));
         // Edge case for isPositive method
         assertFalse(mathUtils.isPositive(0));
+        // Additional edge cases for isPositive method
+        assertTrue(mathUtils.isPositive(Integer.MAX_VALUE));
+        assertFalse(mathUtils.isPositive(Integer.MIN_VALUE));
     }
 }
