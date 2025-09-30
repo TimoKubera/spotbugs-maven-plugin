@@ -60,6 +60,10 @@ public class MathUtilsTest {
     void testPowerBasic() {
         assertEquals(8, mathUtils.power(2, 3));
         assertEquals(1, mathUtils.power(5, 0));
+        // Edge cases for power method
+        assertEquals(0, mathUtils.power(0, 3));
+        assertEquals(1, mathUtils.power(0, 0));
+        assertEquals(1, mathUtils.power(2, -3));
     }
 
     @Test
