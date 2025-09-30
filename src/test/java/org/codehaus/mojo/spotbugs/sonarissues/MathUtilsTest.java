@@ -46,6 +46,10 @@ public class MathUtilsTest {
     void testIsEvenBasic() {
         assertTrue(mathUtils.isEven(4));
         assertFalse(mathUtils.isEven(3));
+        // Edge cases for isEven method
+        assertTrue(mathUtils.isEven(0));
+        assertTrue(mathUtils.isEven(-2));
+        assertFalse(mathUtils.isEven(-3));
     }
 
     @Test
