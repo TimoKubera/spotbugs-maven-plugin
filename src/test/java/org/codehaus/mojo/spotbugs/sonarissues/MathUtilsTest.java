@@ -77,5 +77,7 @@ public class MathUtilsTest {
     void testIsPositiveBasic() {
         assertTrue(mathUtils.isPositive(5));
         assertFalse(mathUtils.isPositive(-3));
+        // Edge case for isPositive method
+        assertFalse(mathUtils.isPositive(0));
     }
 }
