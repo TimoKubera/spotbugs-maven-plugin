@@ -36,6 +36,25 @@ public class UserManagementService implements Cloneable {
     private String serviceId = "user-management-service";
     private List<UserProfile> userProfiles = new ArrayList<>();
 
+    public UserManagementService() {
+        // Default constructor
+    }
+
+    /**
+     * Copy constructor for creating a copy of UserManagementService.
+     *
+     * @param original the original UserManagementService instance
+     */
+    public UserManagementService(UserManagementService original) {
+        this.userRepository = original.userRepository;
+        this.paymentService = original.paymentService;
+        // Assuming a shallow copy is acceptable for activeSessions
+        this.activeSessions = new HashMap<>(original.activeSessions);
+        this.serviceId = original.serviceId;
+        // Create a new list for userProfiles to avoid sharing mutable state
+        this.userProfiles = new ArrayList<>(original.userProfiles);
+    }
+
     public UserRepository getUserRepository() {
         return userRepository;
     }
@@ -107,20 +126,6 @@ public class UserManagementService implements Cloneable {
 
     private boolean isActiveSession(String sessionId) {
         return activeSessions.containsKey(sessionId);
-    }
-
-    /**
-     * Creates a clone of the service for testing purposes.
-     */
-    @Override
-    public UserManagementService clone() {
-        try {
-            UserManagementService copy = (UserManagementService) super.clone();
-            copy.userProfiles = new ArrayList<>(userProfiles);
-            return copy;
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
     }
 
     // Inner classes to support the service functionality
